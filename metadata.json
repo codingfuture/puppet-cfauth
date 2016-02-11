@@ -1,0 +1,15 @@
+{
+  "name": "codingfuture-cfauth",
+  "version": "0.9.0",
+  "author": "Andrey Galkin",
+  "summary": "Configures system access security (users, public keys, SSH daemon and firewall)",
+  "license": "Apache-2.0",
+  "source": "https://github.com/codingfuture/puppet-cfauth",
+  "project_page": "https://github.com/codingfuture/puppet-cfauth",
+  "issues_url": "https://github.com/codingfuture/puppet-cfauth/issues",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ],
+  "data_provider": null
+}
+
