@@ -36,16 +36,17 @@ class cfauth::details::admin {
         $sudo_content = "${admin_user}   ALL=(ALL:ALL) NOPASSWD: ALL"
     } else {
         $sudo_content = '
-<%= ${cfauth::admin_user} %>   ALL=(ALL:ALL) ALL
-<%= ${cfauth::admin_user} %>   ALL=(ALL:ALL) NOPASSWD: \
+<%= $cfauth::admin_user %>   ALL=(ALL:ALL) ALL
+<%= $cfauth::admin_user %>   ALL=(ALL:ALL) NOPASSWD: \
 /opt/puppetlabs/puppet/bin/puppet agent --test
-<%= ${cfauth::admin_user} %>   ALL=(ALL:ALL) NOPASSWD: \
+<%= $cfauth::admin_user %>   ALL=(ALL:ALL) NOPASSWD: \
 /usr/bin/apt-get update
-<%= ${cfauth::admin_user} %>   ALL=(ALL:ALL) NOPASSWD: \
+<%= $cfauth::admin_user %>   ALL=(ALL:ALL) NOPASSWD: \
 /usr/bin/apt-get dist-upgrade *
-<% ${cfauth::sudo_no_password_commands}.each |cmd| { -%>
-<%= ${cfauth::admin_user} %>   ALL=(ALL:ALL) NOPASSWD: <%= $cmd  %>
-<% } -%>
+<% if $cfauth::sudo_no_password_commands {
+    any2array($cfauth::sudo_no_password_commands).each |cmd| { -%>
+<%= $cfauth::admin_user %>   ALL=(ALL:ALL) NOPASSWD: <%= $cmd  %>
+<% } } -%>
 '
     }
     
