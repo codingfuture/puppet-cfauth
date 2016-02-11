@@ -44,7 +44,7 @@ class cfauth::details::admin {
 <%= $cfauth::admin_user %>   ALL=(ALL:ALL) NOPASSWD: \
 /usr/bin/apt-get dist-upgrade *
 <% if $cfauth::sudo_no_password_commands {
-    any2array($cfauth::sudo_no_password_commands).each |cmd| { -%>
+    any2array($cfauth::sudo_no_password_commands).each |$cmd| { -%>
 <%= $cfauth::admin_user %>   ALL=(ALL:ALL) NOPASSWD: <%= $cmd  %>
 <% } } -%>
 '
