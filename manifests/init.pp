@@ -20,14 +20,14 @@ class cfauth (
     service{ 'ssh': ensure => running }
     
     file {'/etc/ssh/sshd_config':
-        group => root,
-        owner => root,
-        mode => '0600',
+        group   => root,
+        owner   => root,
+        mode    => '0600',
         content => epp($sshd_config_template, {
             sshd_ports => $sshd_ports,
         }),
         require => Group['ssh_access'],
-        notify => Service['ssh'],
+        notify  => Service['ssh'],
     }
     
     $fw_ports = prefix($sshd_ports, 'tcp/')

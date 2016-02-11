@@ -6,15 +6,15 @@ class cfauth::details::admin {
     
     group {$admin_user: ensure => present }
     user {$admin_user:
-        ensure => present,
-        gid => $admin_user,
-        groups => ['sudo', 'ssh_access'],
-        managehome => true,
-        home => "/home/${admin_user}",
-        password => $admin_password,
+        ensure         => present,
+        gid            => $admin_user,
+        groups         => ['sudo', 'ssh_access'],
+        managehome     => true,
+        home           => "/home/${admin_user}",
+        password       => $admin_password,
         purge_ssh_keys => true,
-        shell => '/bin/bash',
-        require => [ Package['sudo'], Group['ssh_access'] ],
+        shell          => '/bin/bash',
+        require        => [ Package['sudo'], Group['ssh_access'] ],
     }
     mailalias{$admin_user:
         recipient => 'root',
@@ -38,11 +38,11 @@ class cfauth::details::admin {
         $sudo_content = '
 <%= $cfauth::admin_user %>   ALL=(ALL:ALL) ALL
 <%= $cfauth::admin_user %>   ALL=(ALL:ALL) NOPASSWD: \
-/opt/puppetlabs/puppet/bin/puppet agent --test
+    /opt/puppetlabs/puppet/bin/puppet agent --test
 <%= $cfauth::admin_user %>   ALL=(ALL:ALL) NOPASSWD: \
-/usr/bin/apt-get update
+    /usr/bin/apt-get update
 <%= $cfauth::admin_user %>   ALL=(ALL:ALL) NOPASSWD: \
-/usr/bin/apt-get dist-upgrade *
+    /usr/bin/apt-get dist-upgrade *
 <% if $cfauth::sudo_no_password_commands {
     any2array($cfauth::sudo_no_password_commands).each |$cmd| { -%>
 <%= $cfauth::admin_user %>   ALL=(ALL:ALL) NOPASSWD: <%= $cmd  %>
@@ -51,9 +51,9 @@ class cfauth::details::admin {
     }
     
     file {"/etc/sudoers.d/${admin_user}":
-        group => root,
-        owner => root,
-        mode => '0400',
+        group   => root,
+        owner   => root,
+        mode    => '0400',
         replace => true,
         content => inline_epp($sudo_content),
     }
