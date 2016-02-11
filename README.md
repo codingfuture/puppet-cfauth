@@ -12,6 +12,16 @@ Generic configuration of system security:
 * Setup sudoers
 * Configure firewall for SSH access only from whitelisted hosts
 
+## Setup
+
+If r10k is used until [RK-3](https://tickets.puppetlabs.com/browse/RK-3) is solved, make
+sure to have the following lines in Puppetfile:
+
+```ruby
+mod 'puppetlabs/stdlib', '4.11.0'
+mod 'codingfuture/cfnetwork'
+```
+
 ## `cfauth` parameters
 
 * `admin_auth_keys - mandatory required list of allowed SSH public keys in format
