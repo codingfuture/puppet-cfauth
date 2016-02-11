@@ -30,11 +30,12 @@ mod 'codingfuture/cfnetwork'
 * `admin_password` = undef - encrypted password for `root` and `$admin_user`, if set
     *Note: use the following command for generation `mkpasswd -m sha-512`*
 * `admin_hosts` = undef - passed as `src` paramter to `cfnetwork::service_port`
-* `sudo_no_password` = false - allow `sudo` for `$admin_user` without password. See below.
+* `sudo_no_password_all` = false - allow `sudo` for `$admin_user` without password. See below.
+* `sudo_no_password_commands` = undef - optional list of commands which are allowed to run without password
 * `sshd_ports` = '22',
 * `sshd_config_template` = 'cfauth/sshd_config.epp',
 
-### `sudo_no_password` purpose
+### `sudo_no_password_all` purpose
 
 Enabling it is useful for bulk administration of less privileged VMs.
 
