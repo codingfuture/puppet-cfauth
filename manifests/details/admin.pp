@@ -32,19 +32,21 @@ class cfauth::details::admin {
         )
     }
     
-    if $::cfauth::sudo_no_password {
+    if $::cfauth::sudo_no_password_all {
         $sudo_content = "${admin_user}   ALL=(ALL:ALL) NOPASSWD: ALL"
     } else {
-        $sudo_content = "
-${admin_user}   ALL=(ALL:ALL) ALL
-${admin_user}   ALL=(ALL:ALL) NOPASSWD: \
+        $sudo_content = '
+<%= ${cfauth::admin_user} %>   ALL=(ALL:ALL) ALL
+<%= ${cfauth::admin_user} %>   ALL=(ALL:ALL) NOPASSWD: \
 /opt/puppetlabs/puppet/bin/puppet agent --test
-${admin_user}   ALL=(ALL:ALL) NOPASSWD: \
+<%= ${cfauth::admin_user} %>   ALL=(ALL:ALL) NOPASSWD: \
 /usr/bin/apt-get update
-${admin_user}   ALL=(ALL:ALL) NOPASSWD: \
+<%= ${cfauth::admin_user} %>   ALL=(ALL:ALL) NOPASSWD: \
 /usr/bin/apt-get dist-upgrade *
-
-"
+<% ${cfauth::sudo_no_password_commands}.each |cmd| { -%>
+<%= ${cfauth::admin_user} %>   ALL=(ALL:ALL) NOPASSWD: <%= $cmd  %>
+<% } -%>
+'
     }
     
     file {"/etc/sudoers.d/${admin_user}":
@@ -52,6 +54,6 @@ ${admin_user}   ALL=(ALL:ALL) NOPASSWD: \
         owner => root,
         mode => '0400',
         replace => true,
-        content => $sudo_content,
+        content => inline_epp($sudo_content),
     }
 }

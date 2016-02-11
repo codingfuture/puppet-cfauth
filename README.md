@@ -1,83 +1,37 @@
 # cfauth
 
-#### Table of Contents
-
-1. [Description](#description)
-1. [Setup - The basics of getting started with cfauth](#setup)
-    * [What cfauth affects](#what-cfauth-affects)
-    * [Setup requirements](#setup-requirements)
-    * [Beginning with cfauth](#beginning-with-cfauth)
-1. [Usage - Configuration options and additional functionality](#usage)
-1. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
-1. [Limitations - OS compatibility, etc.](#limitations)
-1. [Development - Guide for contributing to the module](#development)
-
 ## Description
 
-Start with a one- or two-sentence summary of what the module does and/or what
-problem it solves. This is your 30-second elevator pitch for your module.
-Consider including OS/Puppet version it works with.
+Generic configuration of system security:
 
-You can give more descriptive information in a second paragraph. This paragraph
-should answer the questions: "What does this module *do*?" and "Why would I use
-it?" If your module has a range of functionality (installation, configuration,
-management, etc.), this is the time to mention it.
+* Update SSH config and strip unused features
+* Enable only SSHv2 public key authentication
+* Enable SSH login only for members of `ssh_access` group
+* Create special user for admin access
+* Setup encrypted admin password
+* Setup sudoers
+* Configure firewall for SSH access only from whitelisted hosts
 
-## Setup
+## `cfauth` parameters
 
-### What cfauth affects **OPTIONAL**
+* `admin_auth_keys - mandatory required list of allowed SSH public keys in format
+    of suitable for `create_resources(ssh_authorized_key, $admin_auth_keys, { user => $admin_user, type => 'ssh-rsa' })`.
+* `admin_user` = 'adminaccess' - setup non-root user for SSH access capable of `sudo`
+* `admin_password` = undef - encrypted password for `root` and `$admin_user`, if set
+    *Note: use the following command for generation `mkpasswd -m sha-512`*
+* `admin_hosts` = undef - passed as `src` paramter to `cfnetwork::service_port`
+* `sudo_no_password` = false - allow `sudo` for `$admin_user` without password. See below.
+* `sshd_ports` = '22',
+* `sshd_config_template` = 'cfauth/sshd_config.epp',
 
-If it's obvious what your module touches, you can skip this section. For
-example, folks can probably figure out that your mysql_instance module affects
-their MySQL instances.
+### `sudo_no_password` purpose
 
-If there's more that they should know about, though, this is the place to mention:
+Enabling it is useful for bulk administration of less privileged VMs.
 
-* A list of files, packages, services, or operations that the module will alter,
-  impact, or execute.
-* Dependencies that your module automatically installs.
-* Warnings or other important notices.
+Even if password is required, the following commands can be run without password:
 
-### Setup Requirements **OPTIONAL**
+* `/opt/puppetlabs/puppet/bin/puppet agent --test` - deploy puppet
+* `/usr/bin/apt-get update` - update apt repository metadata
+* `/usr/bin/apt-get dist-upgrade *` - run system upgrade with optional parameter, like
+    `-s -y` (for simulation( and `-y` (for install)
 
-If your module requires anything extra before setting up (pluginsync enabled,
-etc.), mention it here.
-
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you might want to include an additional "Upgrading" section
-here.
-
-### Beginning with cfauth
-
-The very basic steps needed for a user to get the module up and running. This
-can include setup steps, if necessary, or it can be an example of the most
-basic use of the module.
-
-## Usage
-
-This section is where you describe how to customize, configure, and do the
-fancy stuff with your module here. It's especially helpful if you include usage
-examples and code samples for doing things with your module.
-
-## Reference
-
-Here, include a complete list of your module's classes, types, providers,
-facts, along with the parameters for each. Users refer to this section (thus
-the name "Reference") to find specific details; most users don't read it per
-se.
-
-## Limitations
-
-This is where you list OS compatibility, version compatibility, etc. If there
-are Known Issues, you might want to include them under their own heading here.
-
-## Development
-
-Since your module is awesome, other users will want to play with it. Let them
-know what the ground rules for contributing are.
-
-## Release Notes/Contributors/Etc. **Optional**
-
-If you aren't using changelog, put your release notes here (though you should
-consider using changelog). You can also add any additional sections you feel
-are necessary or important to include here. Please use the `## ` header.

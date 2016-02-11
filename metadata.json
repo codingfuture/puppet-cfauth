@@ -7,9 +7,20 @@
   "source": "https://github.com/codingfuture/puppet-cfauth",
   "project_page": "https://github.com/codingfuture/puppet-cfauth",
   "issues_url": "https://github.com/codingfuture/puppet-cfauth/issues",
-  "dependencies": [
-    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  "operatingsystem_support": [
+    {
+        "operatingsystem":"Debian",
+        "operatingsystemrelease":[ "8" ]
+    },
+    {
+        "operatingsystem": "Ubuntu",
+        "operatingsystemrelease": [ "14.04", "15.04", "15.10" ]
+    }
   ],
-  "data_provider": null
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 4.11.0"},
+    {"name":"codingfuture-cfnetwork","version_requirement":">= 0.9.0"}
+  ],
+  "data_provider": 'hiera'
 }
 

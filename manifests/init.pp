@@ -1,11 +1,13 @@
 
 class cfauth (
-    $admin_user = 'admin',
+    $admin_auth_keys,
+    $admin_user = 'adminaccess',
     $admin_password = undef, # mkpasswd -m sha-512 
-    $admin_auth_keys = undef,
     $admin_hosts = undef, # hosts to whitelist for SSH access
-    $sudo_no_password = true,
+    $sudo_no_password_all = false,
+    $sudo_no_password_commands = [],
     $sshd_ports = '22',
+    $sshd_config_template = 'cfauth/sshd_config.epp',
 ) {
     include cfnetwork
     
@@ -21,7 +23,7 @@ class cfauth (
         group => root,
         owner => root,
         mode => '0600',
-        content => epp('cfauth/sshd_config.epp', {
+        content => epp($sshd_config_template, {
             sshd_ports => $sshd_ports,
         }),
         require => Group['ssh_access'],
