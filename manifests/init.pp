@@ -30,7 +30,7 @@ class cfauth (
         notify  => Service['ssh'],
     }
     
-    $fw_ports = prefix($sshd_ports, 'tcp/')
+    $fw_ports = prefix(any2array($sshd_ports), 'tcp/')
     cfnetwork::describe_service { 'cfssh':
         server => $fw_ports,
     }

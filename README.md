@@ -22,6 +22,17 @@ mod 'puppetlabs/stdlib', '4.11.0'
 mod 'codingfuture/cfnetwork'
 ```
 
+## Implicit resources created
+
+```yaml
+cfnetwork::describe_services:
+    cfssh:
+        server: prefix(any2array($cfauth::sshd_ports), 'tcp/')
+cfnetwork::service_ports:
+    'any:cfssh:cfauth':
+        src: $cfauth::admin_hosts
+```
+
 ## `cfauth` parameters
 
 * `admin_auth_keys - mandatory required list of allowed SSH public keys in format
