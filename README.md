@@ -20,6 +20,7 @@ sure to have the following lines in Puppetfile:
 ```ruby
 mod 'puppetlabs/stdlib', '4.11.0'
 mod 'codingfuture/cfnetwork'
+# make sure you check dependencies of dependencies too.
 ```
 
 ## Implicit resources created
