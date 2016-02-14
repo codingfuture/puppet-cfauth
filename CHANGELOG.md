@@ -6,4 +6,4 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
 Initial release
 
-[0.9.0](https://github.com/codingfuture/puppet-cfauth/releases/tag/v0.9.0)
+[0.9.0]: https://github.com/codingfuture/puppet-cfauth/releases/tag/v0.9.0

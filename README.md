@@ -12,6 +12,11 @@ Generic configuration of system security:
 * Setup sudoers
 * Configure firewall for SSH access only from whitelisted hosts
 
+## Technical Support
+
+* [Example configuration](https://github.com/codingfuture/puppet-test)
+* Commercial support: [support@codingfuture.net](mailto:support@codingfuture.net)
+
 ## Setup
 
 If r10k is used until [RK-3](https://tickets.puppetlabs.com/browse/RK-3) is solved, make
