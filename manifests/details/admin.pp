@@ -56,5 +56,6 @@ class cfauth::details::admin {
         mode    => '0400',
         replace => true,
         content => inline_epp($sudo_content),
+        require => Package['sudo'],
     }
 }

@@ -17,6 +17,8 @@ class cfauth (
     
     include cfauth::details::admin
     
+    package { 'sudo': }
+    package { 'openssh-server': }
     service{ 'ssh': ensure => running }
     
     file {'/etc/ssh/sshd_config':
@@ -26,7 +28,7 @@ class cfauth (
         content => epp($sshd_config_template, {
             sshd_ports => $sshd_ports,
         }),
-        require => Group['ssh_access'],
+        require => [ Group['ssh_access'], Package['openssh-server'] ],
         notify  => Service['ssh'],
     }
     
