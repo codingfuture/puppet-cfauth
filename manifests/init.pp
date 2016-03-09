@@ -6,10 +6,22 @@ class cfauth (
     $admin_hosts = undef, # hosts to whitelist for SSH access
     $sudo_no_password_all = false,
     $sudo_no_password_commands = [],
+    $sudo_env_keep = [],
     $sshd_ports = '22',
     $sshd_config_template = 'cfauth/sshd_config.epp',
 ) {
+    include stdlib
     include cfnetwork
+    
+    $sudo_no_password_commands_all = [
+        '/opt/puppetlabs/puppet/bin/puppet agent --test',
+        '/usr/bin/apt-get update',
+        '/usr/bin/apt-get dist-upgrade *',
+    ] + pick_default($sudo_no_password_commands, [])
+    
+    $sudo_env_keep_all = [
+        'DEBIAN_FRONTEND',
+    ] + pick_default($sudo_env_keep, [])
     
     class {'cfauth::details::root':
         stage => 'setup',

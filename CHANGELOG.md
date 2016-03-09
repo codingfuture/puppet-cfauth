@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.9.4]
+
+- Added sudo_env_keep parameter support
+
 ## [0.9.3]
 
 - Fixed to install sudo & openssh-server in cfauth instead of cfsystem
@@ -20,6 +24,7 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
 Initial release
 
+[0.9.4]: https://github.com/codingfuture/puppet-cfauth/releases/tag/v0.9.4
 [0.9.3]: https://github.com/codingfuture/puppet-cfauth/releases/tag/v0.9.3
 [0.9.2]: https://github.com/codingfuture/puppet-cfauth/releases/tag/v0.9.2
 [0.9.1]: https://github.com/codingfuture/puppet-cfauth/releases/tag/v0.9.1

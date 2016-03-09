@@ -43,16 +43,17 @@ cfnetwork::service_ports:
 
 ## `cfauth` parameters
 
-* `admin_auth_keys - mandatory required list of allowed SSH public keys in format
+* `admin_auth_keys` - mandatory required list of allowed SSH public keys in format
     of suitable for `create_resources(ssh_authorized_key, $admin_auth_keys, { user => $admin_user, type => 'ssh-rsa' })`.
-* `admin_user` = 'adminaccess' - setup non-root user for SSH access capable of `sudo`
-* `admin_password` = undef - encrypted password for `root` and `$admin_user`, if set
+* `admin_user = 'adminaccess'` - setup non-root user for SSH access capable of `sudo`
+* `admin_password = undef` - encrypted password for `root` and `$admin_user`, if set
     *Note: use the following command for generation `mkpasswd -m sha-512`*
-* `admin_hosts` = undef - passed as `src` paramter to `cfnetwork::service_port`
-* `sudo_no_password_all` = false - allow `sudo` for `$admin_user` without password. See below.
-* `sudo_no_password_commands` = undef - optional list of commands which are allowed to run without password
-* `sshd_ports` = '22',
-* `sshd_config_template` = 'cfauth/sshd_config.epp',
+* `admin_hosts = undef` - passed as `src` paramter to `cfnetwork::service_port`
+* `sudo_no_password_all = false` - allow `sudo` for `$admin_user` without password. See below.
+* `sudo_no_password_commands` = []` - optional list of commands which are allowed to run without password
+* `sudo_env_keep = []` - optional list of environment variables allowed to be preserved in sudo
+* `sshd_ports = '22'`,
+* `sshd_config_template = 'cfauth/sshd_config.epp'`,
 
 ### `sudo_no_password_all` purpose
 

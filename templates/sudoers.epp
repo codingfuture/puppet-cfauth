@@ -1,0 +1,16 @@
+
+Defaults:<%= $cfauth::admin_user %> env_keep+=DEBIAN_FRONTEND
+
+<% if $cfauth::sudo_no_password_all { -%>
+
+<%= $cfauth::admin_user %> ALL=(ALL:ALL) NOPASSWD: ALL
+
+<% } else { -%>
+
+<%= $cfauth::admin_user %>   ALL=(ALL:ALL) ALL
+
+<% any2array($cfauth::sudo_no_password_commands_all).each |$cmd| { -%>
+<%= $cfauth::admin_user %>   ALL=(ALL:ALL) NOPASSWD: <%= $cmd  %>
+<% } -%>
+
+<% } -%>
