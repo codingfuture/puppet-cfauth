@@ -6,6 +6,7 @@ project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.9.4]
 
 - Added sudo_env_keep parameter support
+- Added forceful /home folder permissions to avoid accidents with not accessible authorized_keys
 
 ## [0.9.3]
 

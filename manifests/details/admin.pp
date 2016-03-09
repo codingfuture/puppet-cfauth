@@ -40,4 +40,12 @@ class cfauth::details::admin {
         content => epp('cfauth/sudoers.epp'),
         require => Package['sudo'],
     }
+    
+    # Make to conflict with any mistaken permission change
+    file { '/home':
+        ensure => directory,
+        owner  => root,
+        group  => root,
+        mode   => '0755',
+    }
 }
