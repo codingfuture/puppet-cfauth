@@ -42,10 +42,12 @@ class cfauth::details::admin {
     }
     
     # Make to conflict with any mistaken permission change
-    file { '/home':
-        ensure => directory,
-        owner  => root,
-        group  => root,
-        mode   => '0755',
+    if !defined(File['/home']) {
+        file { '/home':
+            ensure => directory,
+            owner  => root,
+            group  => root,
+            mode   => '0755',
+        }
     }
 }
