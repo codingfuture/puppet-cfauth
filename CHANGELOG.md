@@ -7,6 +7,7 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
 - Added sudo_env_keep parameter support
 - Added forceful /home folder permissions to avoid accidents with not accessible authorized_keys
+- Added apt-get autoremove to list of sudo no password commands
 
 ## [0.9.3]
 
