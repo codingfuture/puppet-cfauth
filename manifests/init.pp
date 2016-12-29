@@ -1,14 +1,23 @@
 
 class cfauth (
-    $admin_auth_keys,
-    $admin_user = 'adminaccess',
-    $admin_password = undef, # mkpasswd -m sha-512 
-    $admin_hosts = undef, # hosts to whitelist for SSH access
-    $sudo_no_password_all = false,
-    $sudo_no_password_commands = [],
-    $sudo_env_keep = [],
-    $sshd_ports = '22',
-    $sshd_config_template = 'cfauth/sshd_config.epp',
+    Optional[Hash[String[1], Hash]]
+        $admin_auth_keys,
+    String[1]
+        $admin_user = 'adminaccess',
+    Optional[String[1]]
+        $admin_password = undef, # mkpasswd -m sha-512 
+    Optional[Variant[String[1], Array[String[1]]]]
+        $admin_hosts = undef, # hosts to whitelist for SSH access
+    Boolean
+        $sudo_no_password_all = false,
+    Array[String[1]]
+        $sudo_no_password_commands = [],
+    Array[String[1]]
+        $sudo_env_keep = [],
+    Variant[Integer[1,65535], Array[Integer[1,65535]]]
+        $sshd_ports = 22,
+    String[1]
+        $sshd_config_template = 'cfauth/sshd_config.epp',
 ) {
     include stdlib
     include cfnetwork

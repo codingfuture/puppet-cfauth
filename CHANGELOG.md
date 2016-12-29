@@ -5,6 +5,7 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.9.8]
 - Updated to `cfnetwork` 0.9.11+ ipset support
+- Added strict parameter type checking
 - Automatic newer puppet-lint fixes
 - Fixed puppet-lint and metadata-json-lint warnings
 
