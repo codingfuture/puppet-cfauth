@@ -38,7 +38,15 @@ cfnetwork::describe_services:
         server: prefix(any2array($cfauth::sshd_ports), 'tcp/')
 cfnetwork::service_ports:
     'any:cfssh:cfauth':
-        src: $cfauth::admin_hosts
+        src: 'ipset:cfauth_admin'
+cfnetwork::ipsets:
+    cfauth_admin:
+        type: net
+        addr: $cfauth::admin_hosts
+        dynamic: true
+    whitelist:cfauth:
+        type: net
+        addr: 'ipset:cfauth_admin'
 ```
 
 ## `cfauth` parameters
