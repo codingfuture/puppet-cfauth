@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.9.8]
+- Updated to `cfnetwork` 0.9.11+ ipset support
+- Automatic newer puppet-lint fixes
+- Fixed puppet-lint and metadata-json-lint warnings
+
 ## [0.9.7]
 
 - Changed to define root user with explicit home to be more friendly to cfdb

@@ -3,7 +3,7 @@ class cfauth::details::admin {
     $admin_user = $::cfauth::admin_user
     $admin_password = $::cfauth::admin_password
     $admin_auth_keys = $::cfauth::admin_auth_keys
-    
+
     group {$admin_user: ensure => present }
     user {$admin_user:
         ensure         => present,
@@ -31,7 +31,7 @@ class cfauth::details::admin {
             }
         )
     }
-    
+
     file {"/etc/sudoers.d/${admin_user}":
         group   => root,
         owner   => root,
@@ -40,7 +40,7 @@ class cfauth::details::admin {
         content => epp('cfauth/sudoers.epp'),
         require => Package['sudo'],
     }
-    
+
     # Make to conflict with any mistaken permission change
     if !defined(File['/home']) {
         file { '/home':
