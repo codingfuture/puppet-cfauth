@@ -1,4 +1,5 @@
 
+# Please see README
 class cfauth (
     Optional[Hash[String[1], Hash]]
         $admin_auth_keys,

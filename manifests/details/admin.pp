@@ -1,7 +1,8 @@
 
+# Please see README
 class cfauth::details::admin {
     assert_private()
-    
+
     $admin_user = $::cfauth::admin_user
     $admin_password = $::cfauth::admin_password
     $admin_auth_keys = $::cfauth::admin_auth_keys
