@@ -1,6 +1,6 @@
 {
   "name": "codingfuture-cfauth",
-  "version": "0.9.8",
+  "version": "0.10.0",
   "author": "Andrey Galkin",
   "summary": "Configures system access security (users, public keys, SSH daemon and firewall)",
   "license": "Apache-2.0",
