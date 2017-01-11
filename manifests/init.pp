@@ -46,7 +46,11 @@ class cfauth (
 
     package { 'sudo': }
     package { 'openssh-server': }
-    service{ 'ssh': ensure => running }
+    service{ 'ssh':
+        ensure   => running,
+        enable   => true,
+        provider => 'systemd',
+    }
 
     file {'/etc/ssh/sshd_config':
         group   => root,

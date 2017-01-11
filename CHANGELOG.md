@@ -3,6 +3,9 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.10.1]
+- Fixed Debian Stretch support
+
 ## [0.10.0]
 - Updated CF deps to v0.10.x
 - Version bump
@@ -48,6 +51,7 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
 Initial release
 
+[0.10.1]: https://github.com/codingfuture/puppet-cfauth/releases/tag/v0.10.1
 [0.10.0]: https://github.com/codingfuture/puppet-cfauth/releases/tag/v0.10.0
 [0.9.8]: https://github.com/codingfuture/puppet-cfauth/releases/tag/v0.9.8
 [0.9.7]: https://github.com/codingfuture/puppet-cfauth/releases/tag/v0.9.7
