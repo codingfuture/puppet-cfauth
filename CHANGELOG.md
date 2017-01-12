@@ -5,6 +5,7 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.10.1]
 - Fixed Debian Stretch support
+- Updated to cfnetwork 0.10.1
 
 ## [0.10.0]
 - Updated CF deps to v0.10.x
