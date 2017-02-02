@@ -13,7 +13,7 @@ define cfauth::sudoentry(
     file {"/etc/sudoers.d/${title}":
         group   => root,
         owner   => root,
-        mode    => '0400',
+        mode    => '0440',
         replace => true,
         content => epp('cfauth/sudoers.epp', {
             user     => $user,
