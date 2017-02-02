@@ -69,11 +69,12 @@ Enabling it is useful for bulk administration of less privileged VMs.
 
 Even if password is required, the following commands can be run without password:
 
-* `/opt/puppetlabs/puppet/bin/puppet agent --test` - deploy puppet
-* `/usr/bin/apt-get update` - update apt repository metadata
+* `/opt/puppetlabs/puppet/bin/puppet agent --test *` - deploy puppet
+* `/usr/bin/apt-get update *` - update apt repository metadata
 * `/usr/bin/apt-get dist-upgrade *` - run system upgrade with optional parameter, like
     `-s -y` (for simulation( and `-y` (for install)
 * `/usr/bin/apt-get autoremove *` - run automatic unusued package remove
+* `/usr/sbin/cfntpdate *` - force run pre-configured ntpdate from `cfsystem` module
 
 The following environment variables are allowed in sudo by default:
 * `DEBIAN_FRONTEND`
