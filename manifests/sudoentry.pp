@@ -8,7 +8,7 @@ define cfauth::sudoentry(
     String[1]
         $user = $cfauth::admin_user,
 ) {
-    if !$cfauth::sudo_no_password_all {
+    if $user != $cfauth::admin_user or !$cfauth::sudo_no_password_all {
         $lines = any2array($command).map |$cmd| {
             "${user}   ALL=(ALL:ALL) NOPASSWD: ${cmd}"
         }

@@ -60,6 +60,7 @@ cfnetwork::ipsets:
 * `sudo_no_password_all = false` - allow `sudo` for `$admin_user` without password. See below.
 * `sudo_no_password_commands` = []` - optional list of commands which are allowed to run without password
 * `sudo_env_keep = []` - optional list of environment variables allowed to be preserved in sudo
+* `sudo_entries = {}` - optional resources of type `cfauth::sudoentry`
 * `sshd_ports = '22'`,
 * `sshd_config_template = 'cfauth/sshd_config.epp'`,
 

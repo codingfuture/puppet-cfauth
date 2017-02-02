@@ -5,6 +5,9 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.10.2]
 - Added generic cfauth::sudoentry support
+- Fixed to cleanup /etc/sudoers.d
+- Added `cfauth::sudo_entries' parameter
+- Improved SSHd setup deps
 
 ## [0.10.1]
 - Fixed Debian Stretch support

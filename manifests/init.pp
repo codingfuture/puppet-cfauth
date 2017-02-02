@@ -23,6 +23,8 @@ class cfauth (
         $sshd_ports = 22,
     String[1]
         $sshd_config_template = 'cfauth/sshd_config.epp',
+    Hash[String[1], Hash]
+        $sudo_entries = {},
 ) {
     include stdlib
     include cfnetwork
@@ -44,14 +46,22 @@ class cfauth (
 
     include cfauth::details::admin
 
-    package { 'sudo': }
-    package { 'openssh-server': }
-    service{ 'ssh':
-        ensure   => running,
-        enable   => true,
-        provider => 'systemd',
+    # sudo
+    #---
+    package { 'sudo': } ->
+    file { '/etc/sudoers.d':
+        ensure  => directory,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0755',
+        purge   => true,
+        recurse => true,
     }
+    create_resources('cfauth::sudoentry', $sudo_entries)
 
+    # SSH server
+    #---
+    package { 'openssh-server': } ->
     file {'/etc/ssh/sshd_config':
         group   => root,
         owner   => root,
@@ -61,6 +71,11 @@ class cfauth (
         }),
         require => [ Group['ssh_access'], Package['openssh-server'] ],
         notify  => Service['ssh'],
+    } ->
+    service{ 'ssh':
+        ensure   => running,
+        enable   => true,
+        provider => 'systemd',
     }
 
     # Configure firewall
