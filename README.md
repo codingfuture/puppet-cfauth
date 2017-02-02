@@ -61,6 +61,8 @@ cfnetwork::ipsets:
 * `sudo_no_password_commands` = []` - optional list of commands which are allowed to run without password
 * `sudo_env_keep = []` - optional list of environment variables allowed to be preserved in sudo
 * `sudo_entries = {}` - optional resources of type `cfauth::sudoentry`
+* `clear_sudoers = true` - clear unmanaged /etc/sudoers.d
+* `custom_sudoers = []` - arbitrary lines to add to global sudoers file
 * `sshd_ports = '22'`,
 * `sshd_config_template = 'cfauth/sshd_config.epp'`,
 

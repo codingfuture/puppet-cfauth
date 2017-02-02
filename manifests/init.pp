@@ -25,6 +25,10 @@ class cfauth (
         $sshd_config_template = 'cfauth/sshd_config.epp',
     Hash[String[1], Hash]
         $sudo_entries = {},
+    Boolean
+        $clear_sudoers = true,
+    Array[String[0]]
+        $custom_sudoers = [],
 ) {
     include stdlib
     include cfnetwork
@@ -54,10 +58,20 @@ class cfauth (
         owner   => 'root',
         group   => 'root',
         mode    => '0755',
-        purge   => true,
+        purge   => $clear_sudoers,
         recurse => true,
     }
+
     create_resources('cfauth::sudoentry', $sudo_entries)
+
+    if $clear_sudoers {
+        file { '/etc/sudoers':
+            owner   => 'root',
+            group   => 'root',
+            mode    => '0440',
+            content => epp('cfauth/sudoers_global.epp')
+        }
+    }
 
     # SSH server
     #---
