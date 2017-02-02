@@ -79,3 +79,9 @@ Even if password is required, the following commands can be run without password
 The following environment variables are allowed in sudo by default:
 * `DEBIAN_FRONTEND`
 
+## `cfauth::sudoentry` type
+
+* `title` - name of file under '/etc/sudoers.d'
+* `command` - command to allow to execute without password
+    * String or Array of Strings
+* `user = $cfauth::admin_user` - user for the entry

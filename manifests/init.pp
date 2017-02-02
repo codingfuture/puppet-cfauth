@@ -32,7 +32,6 @@ class cfauth (
         '/usr/bin/apt-get update *',
         '/usr/bin/apt-get dist-upgrade *',
         '/usr/bin/apt-get autoremove *',
-        '/usr/sbin/cfntpdate *',
     ] + pick_default($sudo_no_password_commands, [])
 
     $sudo_env_keep_all = [
