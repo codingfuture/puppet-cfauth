@@ -85,6 +85,8 @@ The following environment variables are allowed in sudo by default:
 ## `cfauth::sudoentry` type
 
 * `title` - name of file under '/etc/sudoers.d'
-* `command` - command to allow to execute without password
+* `command = []` - command to allow to execute without password
     * String or Array of Strings
+* `env_keep = []` - list of environment variables for env_keep
 * `user = $cfauth::admin_user` - user for the entry
+* `custom_config = []` - arbitrary lines to add
