@@ -5,7 +5,7 @@
 Defaults        env_reset
 Defaults        env_keep="<%= $cfauth::sudo_env_keep_all.join(' ') %>"
 Defaults        mail_badpass
-Defaults        secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+Defaults        secure_path="<%= $cfauth::secure_path.join(':') %>"
 
 root    ALL=(ALL:ALL) ALL
 %sudo   ALL=(ALL:ALL) ALL

@@ -65,6 +65,7 @@ cfnetwork::ipsets:
 * `custom_sudoers = []` - arbitrary lines to add to global sudoers file
 * `sshd_ports = '22'`,
 * `sshd_config_template = 'cfauth/sshd_config.epp'`,
+* `secure_path = [<system default>]` - array of global trusted paths
 
 ### `sudo_no_password_all` purpose
 

@@ -8,6 +8,7 @@ project adheres to [Semantic Versioning](http://semver.org/).
 - Fixed to cleanup /etc/sudoers.d
 - Added `cfauth::sudo_entries', 'cfauth::clear_sudoers' and 'cfauth::custom_sudoers' parameters
 - Minor refactoring
+- Added cfauth::secure_path parameter
 
 ## [0.10.1]
 - Fixed Debian Stretch support

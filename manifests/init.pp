@@ -29,6 +29,15 @@ class cfauth (
         $clear_sudoers = true,
     Array[String[0]]
         $custom_sudoers = [],
+    Array[String[1]]
+        $secure_path = [
+            '/usr/local/sbin',
+            '/usr/local/bin',
+            '/usr/sbin',
+            '/usr/bin',
+            '/sbin',
+            '/bin',
+        ],
 ) {
     include stdlib
     include cfnetwork
