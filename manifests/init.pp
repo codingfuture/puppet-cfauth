@@ -19,7 +19,7 @@ class cfauth (
         $sudo_no_password_commands = [],
     Array[String[1]]
         $sudo_env_keep = [],
-    Variant[Integer[1,65535], Array[Integer[1,65535]]]
+    Variant[Cfnetwork::Port, Array[Cfnetwork::Port]]
         $sshd_ports = 22,
     String[1]
         $sshd_config_template = 'cfauth/sshd_config.epp',
