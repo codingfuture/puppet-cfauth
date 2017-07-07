@@ -13,8 +13,8 @@ class cfauth::details::admin {
 
     group { $admin_user:
         ensure => present,
-    } ->
-    user { $admin_user:
+    }
+    -> user { $admin_user:
         ensure         => present,
         gid            => $admin_user,
         groups         => ['sudo', 'ssh_access'],
@@ -27,8 +27,8 @@ class cfauth::details::admin {
             Package['sudo'],
             Group['ssh_access']
         ],
-    } ->
-    mailalias{$admin_user:
+    }
+    -> mailalias{$admin_user:
         recipient => 'root',
     }
 

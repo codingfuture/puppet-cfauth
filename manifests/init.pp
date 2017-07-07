@@ -65,8 +65,8 @@ class cfauth (
 
     # sudo
     #---
-    package { 'sudo': } ->
-    file { '/etc/sudoers.d':
+    package { 'sudo': }
+    -> file { '/etc/sudoers.d':
         ensure  => directory,
         owner   => 'root',
         group   => 'root',
@@ -88,8 +88,8 @@ class cfauth (
 
     # SSH server
     #---
-    package { 'openssh-server': } ->
-    file {'/etc/ssh/sshd_config':
+    package { 'openssh-server': }
+    -> file {'/etc/ssh/sshd_config':
         group   => root,
         owner   => root,
         mode    => '0600',
@@ -98,8 +98,8 @@ class cfauth (
         }),
         require => [ Group['ssh_access'], Package['openssh-server'] ],
         notify  => Service['ssh'],
-    } ->
-    service{ 'ssh':
+    }
+    -> service{ 'ssh':
         ensure   => running,
         enable   => true,
         provider => 'systemd',
