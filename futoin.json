@@ -1,0 +1,11 @@
+{
+  "name": "codingfuture-cfauth",
+  "version": "0.11.1",
+  "vcs": "git",
+  "package": [
+    "pkg"
+  ],
+  "tools": {
+    "puppet": "*"
+  }
+}
