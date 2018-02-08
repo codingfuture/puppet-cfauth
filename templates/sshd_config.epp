@@ -8,7 +8,6 @@ Port <%= $port %>
 
 Protocol 2
 HostKey /etc/ssh/ssh_host_rsa_key
-HostKey /etc/ssh/ssh_host_dsa_key
 HostKey /etc/ssh/ssh_host_ecdsa_key
 HostKey /etc/ssh/ssh_host_ed25519_key
 
@@ -21,6 +20,7 @@ LoginGraceTime 30
 PermitRootLogin no
 StrictModes yes
 
+AuthenticationMethods publickey
 PubkeyAuthentication yes
 IgnoreRhosts yes
 RSAAuthentication no
@@ -41,7 +41,7 @@ Banner none
 DebianBanner no
 
 AcceptEnv LANG LC_*
-Subsystem sftp /usr/lib/openssh/sftp-server
+Subsystem sftp internal-sftp -l VERBOSE
 
 UsePAM yes
 UseDNS no
@@ -49,8 +49,18 @@ UseDNS no
 ClientAliveInterval 30
 ClientAliveCountMax 2
 
-AllowGroups ssh_access
+AllowGroups ssh_access sftp_only
 
-
-
+Match Group sftp_only
+    AllowStreamLocalForwarding no
+    AllowTcpForwarding no
+    DisableForwarding yes
+    ForceCommand internal-sftp -l VERBOSE -d /data
+    MaxSessions 1
+    PermitOpen none
+    PermitTTY no
+    PermitTunnel no
+    PermitUserRC no
+    X11Forwarding no
+    ChrootDirectory /var/sftp_only/chroot/%u
 

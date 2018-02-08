@@ -12,4 +12,5 @@ class cfauth::details::root {
         home     => '/root',
     }
     group {'ssh_access': ensure => present }
+    group {'sftp_only': ensure => present }
 }

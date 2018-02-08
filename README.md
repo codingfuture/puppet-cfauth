@@ -91,3 +91,30 @@ The following environment variables are allowed in sudo by default:
 * `env_keep = []` - list of environment variables for env_keep
 * `user = $cfauth::admin_user` - user for the entry
 * `custom_config = []` - arbitrary lines to add
+
+# SFTP only users
+
+A standalone `cfauth::sftp` class has to be included.
+
+All users are created with `sftp_` prefix. Their home folders are
+located under `$cfauth::sftp::root/home`. All users are chrooted
+under `$cfauth::sftp::root/chroot/%u`. Each use has `data` folder
+under chroot - the default selected.
+
+Note: if disk quota is configured then filesystem must be mounted
+by any type of user quota support.
+
+## `cfauth::sftp` class
+
+* `$root = '/mnt/sftp'` - root for SFTP location.
+* `$users = {}` - `cfauth::sftp::user` definitions
+
+## `cfauth::sftp::user` type
+
+* `$name` - name of user without `sftp_` prefix.
+* `$auth_keys = {}` - definition of SSH authentication keys.
+* `$user_hosts = []` - list of SSH-accepted IP addresses to allow
+    access from.
+* `$block_limit = undef` - passed to setquota hard block limit
+* `$inode_limit = undef` - passed to setquota hard inode limit
+

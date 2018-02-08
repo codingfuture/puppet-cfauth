@@ -96,7 +96,11 @@ class cfauth (
         content => epp($sshd_config_template, {
             sshd_ports => $sshd_ports,
         }),
-        require => [ Group['ssh_access'], Package['openssh-server'] ],
+        require => [
+            Group['ssh_access'],
+            Group['sftp_only'],
+            Package['openssh-server'],
+        ],
         notify  => Service['ssh'],
     }
     -> service{ 'ssh':
