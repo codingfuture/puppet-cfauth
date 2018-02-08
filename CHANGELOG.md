@@ -5,6 +5,7 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.12.0](https://github.com/codingfuture/puppet-cfauth/releases/tag/v0.12.0)
 - NEW: sftp_only users feature
+- NEW: SSH MaxStartups configuration
 
 ## [0.11.1](https://github.com/codingfuture/puppet-cfauth/releases/tag/v0.11.1)
 - Added Puppet 5.x support

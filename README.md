@@ -66,6 +66,7 @@ cfnetwork::ipsets:
 * `sshd_ports = '22'`,
 * `sshd_config_template = 'cfauth/sshd_config.epp'`,
 * `secure_path = [<system default>]` - array of global trusted paths
+* `ssh_max_startups = 10` - parameter for SSH MaxStartups
 
 ### `sudo_no_password_all` purpose
 
@@ -106,15 +107,15 @@ by any type of user quota support.
 
 ## `cfauth::sftp` class
 
-* `$root = '/mnt/sftp'` - root for SFTP location.
-* `$users = {}` - `cfauth::sftp::user` definitions
+* `root = '/mnt/sftp'` - root for SFTP location.
+* `users = {}` - `cfauth::sftp::user` definitions
 
 ## `cfauth::sftp::user` type
 
-* `$name` - name of user without `sftp_` prefix.
-* `$auth_keys = {}` - definition of SSH authentication keys.
-* `$user_hosts = []` - list of SSH-accepted IP addresses to allow
+* `name` - name of user without `sftp_` prefix.
+* `auth_keys = {}` - definition of SSH authentication keys.
+* `user_hosts = []` - list of SSH-accepted IP addresses to allow
     access from.
-* `$block_limit = undef` - passed to setquota hard block limit
-* `$inode_limit = undef` - passed to setquota hard inode limit
+* `block_limit = undef` - passed to setquota hard block limit
+* `inode_limit = undef` - passed to setquota hard inode limit
 

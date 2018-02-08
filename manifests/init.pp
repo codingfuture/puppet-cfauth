@@ -38,6 +38,8 @@ class cfauth (
             '/sbin',
             '/bin',
         ],
+    Variant[Integer, String[1]]
+        $ssh_max_startups = 10,
 ) {
     include stdlib
     include cfnetwork
@@ -94,7 +96,8 @@ class cfauth (
         owner   => root,
         mode    => '0600',
         content => epp($sshd_config_template, {
-            sshd_ports => $sshd_ports,
+            sshd_ports   => $sshd_ports,
+            max_startups => $ssh_max_startups,
         }),
         require => [
             Group['ssh_access'],

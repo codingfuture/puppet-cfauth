@@ -49,19 +49,24 @@ UseDNS no
 ClientAliveInterval 30
 ClientAliveCountMax 2
 
+MaxStartups <%= $max_startups %>
+
 AllowGroups ssh_access sftp_only
 
 Match Group sftp_only
+    AllowAgentForwarding no
     AllowStreamLocalForwarding no
     AllowTcpForwarding no
-    # Not supported in older OpenSSH
-    #DisableForwarding yes
-    ForceCommand internal-sftp -l VERBOSE -d /data
-    MaxSessions 1
+    X11Forwarding no
     PermitOpen none
+    MaxSessions 1
     PermitTTY no
     PermitTunnel no
     PermitUserRC no
-    X11Forwarding no
+
+    # Not supported in older OpenSSH
+    #DisableForwarding yes
+
+    ForceCommand internal-sftp -l VERBOSE -d /data
     ChrootDirectory /var/sftp_only/chroot/%u
 
