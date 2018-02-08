@@ -54,7 +54,8 @@ AllowGroups ssh_access sftp_only
 Match Group sftp_only
     AllowStreamLocalForwarding no
     AllowTcpForwarding no
-    DisableForwarding yes
+    # Not supported in older OpenSSH
+    #DisableForwarding yes
     ForceCommand internal-sftp -l VERBOSE -d /data
     MaxSessions 1
     PermitOpen none
