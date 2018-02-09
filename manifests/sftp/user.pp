@@ -89,7 +89,7 @@ define cfauth::sftp::user(
 
         exec { "Set ${sftp_user} quota: ${quota_mark}":
             command => [
-                "/usr/sbin/setquota -u sftp_user2 1G 1G 10k 10k \$(/usr/bin/stat -c '%m' ${chroot_dir})",
+                "/usr/sbin/setquota -u ${sftp_user} 1G 1G 10k 10k \$(/usr/bin/stat -c '%m' ${chroot_dir})",
                 "/bin/echo -n '${quota_mark}' > ${mark_file}"
             ].join( ' && ' ),
             unless  => "/bin/grep -q '${quota_mark}' ${mark_file}",
