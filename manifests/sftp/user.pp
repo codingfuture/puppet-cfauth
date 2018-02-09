@@ -93,6 +93,9 @@ define cfauth::sftp::user(
                 "/bin/echo -n '${quota_mark}' > ${mark_file}"
             ].join( ' && ' ),
             unless  => "/bin/grep -q '${quota_mark}' ${mark_file}",
+            require => [
+                User[$sftp_user],
+            ],
         }
     }
 }
