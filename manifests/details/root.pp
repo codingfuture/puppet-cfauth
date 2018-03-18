@@ -11,6 +11,7 @@ class cfauth::details::root {
         password => $::cfauth::admin_password,
         home     => '/root',
     }
-    group {'ssh_access': ensure => present }
-    group {'sftp_only': ensure => present }
+    group { ['ssh_access', 'sftp_only', 'wheel']:
+        ensure => present,
+    }
 }

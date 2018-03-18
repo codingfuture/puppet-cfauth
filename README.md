@@ -10,6 +10,7 @@ Generic configuration of system security:
 * Create special user for admin access
 * Setup encrypted admin password
 * Setup sudoers
+* Harden /bin/su to allow access only from wheel group
 * Configure firewall for SSH access only from whitelisted hosts
 
 ## Technical Support

@@ -17,7 +17,7 @@ class cfauth::details::admin {
     -> user { $admin_user:
         ensure         => present,
         gid            => $admin_user,
-        groups         => ['sudo', 'ssh_access'],
+        groups         => ['sudo', 'ssh_access', 'wheel'],
         managehome     => true,
         home           => "/home/${admin_user}",
         password       => $admin_password,
@@ -25,11 +25,19 @@ class cfauth::details::admin {
         shell          => '/bin/bash',
         require        => [
             Package['sudo'],
-            Group['ssh_access']
+            Group['ssh_access'],
+            Group['wheel'],
         ],
     }
     -> mailalias{$admin_user:
         recipient => 'root',
+    }
+    -> file_line { 'Restrict su for wheel':
+        ensure             => present,
+        path               => '/etc/pam.d/su',
+        line               => 'auth       required   pam_wheel.so',
+        match              => '^#\\s*auth\\s+required\\s+pam_wheel.so\\s*$',
+        append_on_no_match => false,
     }
 
     if $admin_auth_keys {
