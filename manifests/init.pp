@@ -67,7 +67,8 @@ class cfauth (
 
     # sudo
     #---
-    package { 'sudo': }
+    ensure_packages(['sudo'])
+    Package['sudo']
     -> file { '/etc/sudoers.d':
         ensure  => directory,
         owner   => 'root',
