@@ -40,6 +40,15 @@ class cfauth (
         ],
     Variant[Integer, String[1]]
         $ssh_max_startups = 10,
+    Optional[Struct[{
+        server => String[1],
+        domain => String[1],
+        groups => Variant[
+            Pattern[/^[a-z][a-z0-9_]+$/],
+            Array[Pattern[/^[a-z][a-z0-9_]+$/]],
+        ],
+    }]]
+        $freeipa = undef,
 ) {
     include stdlib
     include cfnetwork
@@ -99,6 +108,7 @@ class cfauth (
         content => epp($sshd_config_template, {
             sshd_ports   => $sshd_ports,
             max_startups => $ssh_max_startups,
+            freeipa      => $freeipa,
         }),
         require => [
             Group['ssh_access'],
@@ -133,5 +143,35 @@ class cfauth (
     cfnetwork::ipset { 'whitelist:cfauth':
         type => 'net',
         addr => 'ipset:cfauth_admin',
+    }
+
+    # Configure as FreeIPA client
+    #---
+    if $freeipa {
+        cfnetwork::describe_service { 'cfkerberos':
+            server => [
+                'tcp/88',
+                'tcp/464',
+                'udp/88',
+                'udp/464',
+            ],
+        }
+        cfnetwork::describe_service { 'cfldap':
+            server => [
+                'tcp/389',
+                'tcp/636',
+            ],
+        }
+        cfnetwork::client_port { 'any:cfkerberos:cfauth':
+            user => 'root',
+            dst  => $freeipa['server'],
+        }
+        cfnetwork::client_port { 'any:cfldap:cfauth':
+            user => 'root',
+            dst  => $freeipa['server'],
+        }
+        package { 'freeipa-client': }
+        -> package { 'sssd': }
+        -> File['/etc/ssh/sshd_config']
     }
 }

@@ -5,6 +5,7 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
 ## (next)
 - CHANGED: updated for Ubuntu 18.04 Bionic support
+- NEW: FreeIPA support
 
 ## 0.12.1 (2018-03-19)
 - CHANGED: hardened /bin/su to allow only wheel group

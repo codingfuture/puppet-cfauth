@@ -70,6 +70,10 @@ cfnetwork::ipsets:
 * `sshd_config_template = 'cfauth/sshd_config.epp'`,
 * `secure_path = [<system default>]` - array of global trusted paths
 * `ssh_max_startups = 10` - parameter for SSH MaxStartups
+* `freeipa = undef` - optional FreeIPA client support:
+    - `server` - FreeIPA server address,
+    - `domain` - FreeIPA domain,
+    - `groups` - FreeIPA groups to allow SSH access.
 
 ### `sudo_no_password_all` purpose
 
