@@ -170,8 +170,7 @@ class cfauth (
             user => 'root',
             dst  => $freeipa['server'],
         }
-        package { 'freeipa-client': }
-        -> package { 'sssd': }
+        package { ['freeipa-client', 'sssd', 'sssd-tools']: }
         -> File['/etc/ssh/sshd_config']
     }
 }
