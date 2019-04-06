@@ -8,8 +8,9 @@ class cfauth::details::root {
     assert_private()
 
     user {'root':
-        password => $::cfauth::admin_password,
-        home     => '/root',
+        password       => $::cfauth::admin_password,
+        home           => '/root',
+        purge_ssh_keys => true,
     }
     group { ['ssh_access', 'sftp_only', 'wheel']:
         ensure => present,
