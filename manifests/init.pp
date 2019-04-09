@@ -147,6 +147,8 @@ class cfauth (
 
     # Configure as FreeIPA client
     #---
+    $freeipa_packages = ['freeipa-client', 'sssd', 'sssd-tools']
+
     if $freeipa {
         cfnetwork::describe_service { 'cfkerberos':
             server => [
@@ -170,7 +172,15 @@ class cfauth (
             user => 'root',
             dst  => $freeipa['server'],
         }
-        package { ['freeipa-client', 'sssd', 'sssd-tools']: }
+        package { $freeipa_packages: }
         -> File['/etc/ssh/sshd_config']
+    } else {
+        package { $freeipa_packages:
+            ensure => absent,
+        }
+        -> exec { 'freeipa-cleanup':
+            command => '/bin/sed -i -e "s/ sss//g" /etc/nsswitch.conf',
+            onlyif  => '/bin/grep -q " sss" /etc/nsswitch.conf',
+        }
     }
 }
